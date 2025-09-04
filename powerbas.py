@@ -1,8 +1,9 @@
 # PowerBAS v0.1 - StaryDarkz
 from colorama import Fore, init
-
+from os import system
 
 init()
+system("cls")
 
 db = {"PB-T1592.001-01":{
     "idMitre":"T1592.001",
@@ -18,11 +19,30 @@ db = {"PB-T1592.001-01":{
 
 # MENUES
 
-menu1 = f"""{Fore.CYAN}PowerBAS
+menu1 = f"""{Fore.CYAN}
+    {Fore.WHITE} ⋆         ⋆                  ⋆ {Fore.CYAN}
+   _______________________________________
+ / \                                      \\
+|   |                                     | {Fore.WHITE} ⋆{Fore.CYAN}
+\__ | ___                   ___   _   ___ |
+    || _ \_____ __ ____ _ _| _ ) /_\ / __||{Fore.WHITE}⋆{Fore.CYAN}
+{Fore.WHITE} ⋆{Fore.CYAN}  ||  _/ _ \ V  V /-_) '_| _ \/ _ \\\__ \|
+    ||_| \___/\_/\_/\__|_| |___/_/ \_\___/|
+{Fore.WHITE}   ⋆{Fore.CYAN}| ____________________{Fore.WHITE}v0.1{Fore.CYAN}____________|
+    |                                     |  {Fore.WHITE}⋆{Fore.CYAN}
+    |  ▄                                  |
+    |   ▀▄                                |
+{Fore.WHITE}⋆{Fore.CYAN}   |  ▄▀ ▄▄                              |{Fore.WHITE}⋆{Fore.CYAN}
+    |                                     |
+   {Fore.WHITE}⋆{Fore.CYAN}|  ___________________________________|{Fore.WHITE} ⋆{Fore.CYAN}
+    \_/__@starydarkz_____________________/{Fore.WHITE}⋆{Fore.CYAN}
 
-Ingresa el ID unico:
---->{Fore.WHITE}"""
+{Fore.WHITE}Resources:
+{Fore.WHITE}- {Fore.CYAN}Attacks ID: https://127.0.0.1./xxx/xxx
+{Fore.WHITE}- {Fore.CYAN}Source Code: https://github.com/starydarkz/powerbas
 
+{Fore.WHITE}Ingresa los ID(s) de ataques separados por coma:
+ -->🕯 {Fore.LIGHTCYAN_EX}"""
 
 def save_script(script):
 
@@ -100,7 +120,6 @@ def main(menu1=menu1):
 
 
 #Input
-# FALTA - Menu  mas agradable
 # FALTA - Mecanismo para seleccionar ataques
 # FALTA - Base de datos de ataques unicos 
 # FALTA - Conexion con base de datos
