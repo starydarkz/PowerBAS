@@ -18,3 +18,9 @@ PowerBAS es una herramienta de Simulacion de brecha y ataques (BAS) el cual tien
 - Librerias de python: colorama
 - Powershell
 
+# Lista de Ataques
+
+- PB-T1592.001-01: **Enumerate PlugNPlay Camera**
+
+
+- PB-T1007-01: **Enumerate System Services**
