@@ -1,32 +1,14 @@
 # PowerBAS - @StaryDarkz
+
 from colorama import Fore, init
 from os import system
 
-
 init()
-system("clear")
 
-version = "v0.2-beta"
+version = "v0.3-beta"
 
 
-db = {"PB-T1592.001-01":{
-    "idMitre":"T1592.001",
-    "attackName":"Enumerate PlugNPlay Camera",
-    "tags":["powershell", "discovery_info"],
-    "requirements":["None"],
-    "commands": ["Get-CimInstance -Query \"SELECT * FROM Win32_PnPEntity\""],
-    "cleanup":["None"]
-  },
-  "PB-T1007-01":{
-    "idMitre":"T1592.001",
-    "attackName":"Enumerate System Services",
-    "tags":["processcmd", "discovery_info"],
-    "requirements":["None"],
-    "commands": ["net start"],
-    "cleanup":["None"]
-  }
-}
-
+from db_attacks import db
 
 
 # MENUES
@@ -50,13 +32,18 @@ menu1 = f"""{Fore.LIGHTGREEN_EX}
     \_/__@starydarkz_____________________/{Fore.WHITE}⋆{Fore.LIGHTGREEN_EX}
 
 {Fore.WHITE}Resources:
-{Fore.WHITE}- {Fore.CYAN}Attacks ID: https://github.com/starydarkz...
+{Fore.WHITE}- {Fore.CYAN}Attacks ID: https://github.com/starydarkz/PowerBAS/wiki
 {Fore.WHITE}- {Fore.CYAN}Source Code: https://github.com/starydarkz/powerbas
 """
-menu2 = f"""{Fore.WHITE}Tipo de BAS:\n{Fore.CYAN}1|- Local attack using ps1\n2|- Remote Attack using WinRM
- {Fore.LIGHTWHITE_EX}\n-->🕯 {Fore.LIGHTYELLOW_EX}"""
-menu3 = f"""{Fore.WHITE}Ingresa los ID(s) de ataques separados por coma:
- {Fore.LIGHTWHITE_EX}\n->🕯 {Fore.LIGHTYELLOW_EX}"""
+
+def clearwindow():
+    """ Limpiar la terminal en cualquier sistema operativo"""
+    from os import name, system
+    if name == 'nt':
+        system("cls")
+    else:
+        system("clear")
+
 
 def save_script(script):
     ''' Funcion para guardar los scripts '''
@@ -64,10 +51,11 @@ def save_script(script):
     file = open("script.ps1", "w")
     file.write(script)
     file.close
-    print (Fore.LIGHTGREEN_EX, script, "\nSe ha creado un script")
+    print (Fore.LIGHTGREEN_EX, script, "\n [INFO] - Script PowerBAS creado.")
 
 def format_devices(devices):
-    ''' Formatear entrada de usuario para la lista de equipos en la funcion de Ataque Remoto WinRM'''
+    ''' Formatear entrada de usuario para la lista de equipos a una lista'''
+
     if devices[-1] == ",":
         devices = devices[:-1]
        
@@ -86,9 +74,9 @@ def format_attacksId(ids):
         element = [ids]        
         return element
 
-def localps1_constructor(select, db=db):
+def localps1_constructor(select, version=version, db=db):
 
-    script = "#PowerBAS v0.2 \n\n"
+    script = f"#PowerBAS {version}\n\n"
 
     count = 0
     count_it = 0
@@ -197,10 +185,11 @@ def localps1_constructor(select, db=db):
                 for c_step in db[ID]["cleanup"]:
                     script = script + f"#Cleanup\n"
                     script = script + f'Invoke-Expression "{c_step}"\n'  
-    save_script(script)
-def remotewinrm_constructor(select, devices, db=db):
     
-    script = "#PowerBAS v0.2 \n\n"
+    save_script(script)
+def remotewinrm_constructor(select, devices, version=version, db=db):
+    
+    script = f"#PowerBAS {version}\n\n"
     count = 0
     count_it = 0
 
@@ -330,9 +319,28 @@ def remotewinrm_constructor(select, devices, db=db):
     save_script(script)
 
 
-def main(menu1=menu1, menu2=menu2, menu3=menu3):
+# def selector_attacks(ttps, mode):
+#     ''' Selecciona los id attacos en base a TTP previamente definidos'''
+    
+#     ids_attacks = []
 
+#     mode = ["Completo",
+#             "Adaptada al APT",
+#             "ID random en base a TTP"
+#             ]
+    
+#     for id_tecnica in ttps:
+#         pass
+
+
+def main(menu1=menu1):
+
+    clearwindow()
     print (menu1) 
+
+    menu2 = f"{Fore.WHITE}Tipo de BAS:\n{Fore.CYAN}1|- Local attack using ps1\n2|- Remote Attack using WinRM{Fore.LIGHTWHITE_EX}\n\n-->🕯 {Fore.LIGHTYELLOW_EX}"
+    menu3 = f"{Fore.WHITE}Ingresa los ID(s) de ataques separados por coma:{Fore.LIGHTWHITE_EX}\n\n-->🕯 {Fore.LIGHTYELLOW_EX}"
+    
     sel2 = input(menu2) #Tipo de BAS
     sel3 = input(menu3) #Lista de ID de ataques
 
